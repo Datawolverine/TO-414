@@ -1,0 +1,45 @@
+---
+title: "Class Submission 9/18"
+author: "Adam K"
+date: "September 18, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Class Exercise
+
+Start an RMD file and do the following exercise. 
+
+1. Import the file nycflightsjan13.csv - it has data on all the flights leaving NYC airports in Jan 2013.
+```{r}
+nyc <- read.csv("nycflightsjan13.csv")
+```
+
+2. Use the function *head()* to see first few rows of data that you just imported. You can do *tail()* as well for last few rows.
+
+```{r}
+print("Head")
+head(nyc)
+
+print("Tail")
+tail(nyc)
+```
+3. How many rows and columns do you have? You can find out using *nrow()* and *ncol()* functions.
+```{r}
+nrow(nyc)
+
+ncol(nyc)
+```
+4. Calculate Average Arrival Delay for all flights using the *mean()* function. Take care to specifiy how you are dealing with NA values. Also, you will need to access individual column of the data frame using the $ notation.
+```{r}
+#I chose to remove NA values
+mean(nyc$arr_delay, na.rm = T)
+
+```
+5. Make a histogram of Arrival Delays using the function *hist()*
+```{r}
+hist(nyc$arr_delay)
+```

@@ -1,0 +1,211 @@
+---
+title: "R Basics - Data Management"
+author: "Sanjeev Kumar"
+date: "Sep 11, 2018"
+output: 
+  html_document: 
+    highlight: tango
+---
+
+## File for Session 03: Data Management
+
+### Vectors and Data Frames
+  
+We will begin where we left off last class. As you recall, vectors have multiple values. Individual values can be accessed using the [ ] notations. These notations can involve logical arguments (often called **Logical Indexing**) so that you can select Values based on a criteria. 
+```{r}
+days <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", 1, 2, 3, 4.55)
+days[2]  #The second value
+days[2:5] #Second through fifth value
+days[-4] #Everything except the 4th value
+days[days == "Sun" | days == "Sat"] #Get all days that are Sat or Sun
+```
+
+Moving beyond numeric data - Factors for ordinal/categorical values
+```{r}
+group <- c(1, 1, 1, 2, 2, 2, 3, 3, 3)
+group <- as.factor(group); group  #as.XYZ() functions exist for all kinds of XYZ
+class(group) #What kind of variable it is
+levels(group) <- c("Low", "Medium", "High"); group
+```
+
+Finally - the most important of them all - Data Frames. Data Frames are like tables - rows and columns of values with a column header. Essentially, its several vectors of equal length combined together.
+```{r}
+age <- c(17, 19, 21, 22, 18, 23, 17, 18)
+score <- c(98, 88, 70, 54, 76, 92, 67, 44)
+gender <- c(1, 2, 1, 1, 2, 2, 1, 1); gender <- as.factor(gender)
+levels(gender) <- c("male", "female")
+combineddata <- data.frame(age, gender, score); combineddata
+rm(score, age, gender) #Removing previous data
+combineddata$score #accessing components of a data frame
+names(combineddata) #Find names of data frame constituents
+str(combineddata) #Find structure of the data frame
+nrow(combineddata[combineddata$score > 75,])
+```
+
+### Getting Your Data Into R
+
+Let's start by exploring how we can get some data into R. You can of course type your data - for example:
+```{r}
+salary <- c(100, 125, 95, 135, 160)  
+industry <- c("Manufacturing", "E-Commerce", "Logistics", "Consulting", "Banking")
+```
+
+We can use the vectors above to create a data frame
+```{r}
+salary.by.industry <- data.frame(industry, salary); salary.by.industry
+```
+
+We can use the built-in data editor to edit any existing data. Be careful - there is no "Undo" or "Redo" here - all changes are permanent
+```{r, eval=FALSE}
+#eval=FALSE, otherwise need to deal with edit windows in run time
+salary.by.industry <- edit(salary.by.industry)  #Option 1, Note the assignment
+fix(salary.by.industry) #Option 2
+View(salary.by.industry) #If you just want to view
+```
+
+#### Importing Data Into R
+
+We will now import some data. This is the most common/popular form of getting data into R.  Most import functions follow the format of the generic function read.table. Important options: file name, header = True/False, sep = ",", dec = "."
+```{r, eval=FALSE}
+help("read.table") # Look at detagenils of read.table()
+```
+
+Now import something - data on all flights leaving NYC in 2013.
+```{r}
+nyc <- read.table("nycflightsjan13.csv", header = T, sep = ",")
+```
+
+Important versions: read.csv, read.delim, read.csv2. 
+
+If you are trying to load a very large file then it might make sense to sample it first using nrows by specifying nrows option.
+
+There are a lot of good online datasets online that can be imported into R - use the link instead of the filename. 
+
+There are several other functions for importing data. Reading fixed width files can be done using *read.fwf()*. You can read one line at a time using *readlines()*. R has functions available to import data from other software package: e.g read.dta, read.spss
+
+Mirror functions exist to *export* data into text files
+```{r}
+write.csv(nyc, file = "nyc.csv")
+```
+
+
+### Data Management
+
+We will now work with the NYC flights data.
+
+We have already seen how to add a column. How about how to delete a column:
+```{r}
+nyc <- read.csv("nycflightsjan13.csv")
+nyc$speed <- NULL
+```
+
+We can extract subsets using the [ ] notation.
+```{r}
+nyc[3,1] # Row 3, first column
+nyc[1:5,-3] # First five rows, all columns except the third
+nyc[1:5,"origin"] # origin column for rows 1 through 5
+nyc[1:5,c("arr_time", "dep_time")] # arr_time and dep_time variable for rows 1:5
+#nyc[nyc$dest == "ALB",]  # Note the comma - says all columns, commented for brevity
+nyc[c(3, 15), ]
+```
+
+We can also use the *subset()* function for extracting subset data.
+```{r}
+newdata <- subset(nyc, nyc$dest == "ALB" & nyc$origin == "JFK")
+# subset(nyc, nyc$day == 5 | nyc$day == 6) #Commented for brevity
+```
+
+We can extract random samples from the data.
+```{r}
+#sample(nyc, 2) # Gives two random columns
+nyc[sample(1:nrow(nyc), 2), ] # Gives two random rows, all the columns
+```
+
+Sorting
+```{r, eval=FALSE}
+nyc[order(nyc$arr_delay, decreasing = TRUE),] # Default Ascending, how to do descending?
+```
+
+Summary Statistics
+```{r}
+mean(nyc$arr_delay, na.rm = TRUE)
+median(nyc$arr_delay, na.rm = TRUE)
+var(nyc$arr_delay, na.rm = TRUE)
+max(nyc$arr_delay, na.rm = TRUE)
+# There are also sd(), cov(), quantile(), min(), max(), range()
+```
+
+A useful command for summary statistics
+```{r}
+summary(nyc)
+```
+
+Get the structure of the dataset
+```{r}
+str(nyc)
+```
+
+
+
+Save some typing by attaching your dataset
+```{r}
+attach(nyc) 
+mean(arr_delay, na.rm=TRUE) # Direct access to columns
+```
+
+Some oddities: # Calculating how much time it takes
+```{r}
+system.time(var(nyc$arr_delay, na.rm = TRUE))
+Sys.time() #Get current system time
+```
+
+  Updating your R, only for Windows
+```{r, eval=FALSE }
+install.packages("installr"); 
+library(installr)
+installr()
+```
+
+## Class Exercise
+
+Start an RMD file and do the following exercise. 
+
+1. Import the file nycflightsjan13.csv - it has data on all the flights leaving NYC airports in Jan 2013.
+```{r}
+nyc <- read.csv("nycflightsjan13.csv")
+```
+
+2. Use the function *head()* to see first few rows of data that you just imported. You can do *tail()* as well for last few rows.
+
+```{r}
+print("Head")
+head(nyc)
+
+print("Tail")
+tail(nyc)
+```
+3. How many rows and columns do you have? You can find out using *nrow()* and *ncol()* functions.
+```{r}
+nrow(nyc)
+
+ncol(nyc)
+```
+4. Calculate Average Arrival Delay for all flights using the *mean()* function. Take care to specifiy how you are dealing with NA values. Also, you will need to access individual column of the data frame using the $ notation.
+```{r}
+#I chose to remove NA values
+mean(nyc$arr_delay, na.rm = T)
+
+```
+5. Make a histogram of Arrival Delays using the function *hist()*
+```{r}
+hist(nyc$arr_delay)
+```
+6. (Advanced) Calculate Arrival Delay by Airlines. We will need to use the *tapply()* function here. Make a barplot of arrival delays by airlines using the *barplot()* function.
+```{r}
+
+```
+7. (Advanced) Calculate the average speed of all the flights leaving NYC in Jan 2013. Are speeds of different airlines different?
+```{r}
+x <-subset(nyc, nyc$origin == "NYC")
+
+```

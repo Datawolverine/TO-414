@@ -1,0 +1,601 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Homework Assignment 1},
+            pdfauthor={Adam Kass \& Jacob Shelton \& Syed Ahmad},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Homework Assignment 1}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Adam Kass \& Jacob Shelton \& Syed Ahmad}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Assigned: Sep 18, 2018, Due Sep 25, 2018 11:59PM}
+
+
+\begin{document}
+\maketitle
+
+\subparagraph{\texorpdfstring{This homework is due by \textbf{11:59PM on
+Tue Sep 25}. To complete this assignment, follow these
+steps:}{This homework is due by 11:59PM on Tue Sep 25. To complete this assignment, follow these steps:}}\label{this-homework-is-due-by-1159pm-on-tue-sep-25.-to-complete-this-assignment-follow-these-steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Download the \texttt{HW1.Rmd} file from Canvas
+\item
+  Open \texttt{HW1.Rmd} in RStudio.
+\item
+  Replace the ``Your Name Here'' text in the \texttt{author:} field with
+  names of the students in HW team.
+\item
+  Supply your solutions to the homework by editing \texttt{HW1.Rmd}.
+\item
+  When you have completed the homework and have \textbf{checked} that
+  your code both runs in the Console and knits correctly when you click
+  \texttt{Knit\ HTML}, rename the R Markdown file to
+  \texttt{HW1\_YourNamesHere.Rmd}, and submit on Canvas. (YourNameHere
+  should be changed to your own names.) You should submit both the RMD
+  file and its html output.
+\item
+  Run your code in the Console and Knit HTML frequently to check for
+  errors.
+\item
+  You may find it easier to solve a problem by interacting only with the
+  Console at first.
+\item
+  Note - you can insert an R block for writing your R code by either
+  clicking the \textbf{insert} button or pressing Control-Alt-I.
+\end{enumerate}
+
+\subsubsection{Problem 1: Vectors}\label{problem-1-vectors}
+
+Let's first start working with vectors. I am providing you with the
+following vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{somedata <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{10.4}\NormalTok{, }\FloatTok{9.8}\NormalTok{, }\FloatTok{5.6}\NormalTok{, }\DecValTok{4}\NormalTok{,}\DecValTok{9}\NormalTok{, }\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{, }\FloatTok{3.1}\NormalTok{, }\FloatTok{7.2}\NormalTok{, }\FloatTok{6.4}\NormalTok{, }\FloatTok{8.8}\NormalTok{, }\FloatTok{12.5}\NormalTok{, }\FloatTok{21.7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+I am asking you to do the tasks below. For each of these, you should
+insert a new R code block and type your code there.
+
+What is the 5th value in vector \texttt{somedata}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{somedata[}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9
+\end{verbatim}
+
+Show all values except the 5th value in vector \texttt{somedata}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{somedata[}\OperatorTok{-}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 10.4  9.8  5.6  4.0  2.0  4.0  3.1  7.2  6.4  8.8 12.5 21.7
+\end{verbatim}
+
+Calculate how many values there are in the vector \texttt{somedata}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(somedata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13
+\end{verbatim}
+
+Calculate the difference between the maximum value and the minimum value
+in the vector \texttt{somedata}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{max}\NormalTok{(somedata)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(somedata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19.7
+\end{verbatim}
+
+Show all values in \texttt{somedata} more than 10
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{greaterthanten <-}\StringTok{ }\NormalTok{somedata }\OperatorTok{>}\StringTok{ }\DecValTok{10}
+\NormalTok{somedata[greaterthanten]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10.4 12.5 21.7
+\end{verbatim}
+
+Check whether the value 7.2 exists in the vector \texttt{somedata} or
+not. Code should output \texttt{TRUE} or \texttt{FALSE} depending upon
+whether the value exists or not in the vector.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{any}\NormalTok{(somedata}\OperatorTok{==}\FloatTok{7.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\subsubsection{Problem 2: Factors}\label{problem-2-factors}
+
+Assume that we have collected address data from several students. We are
+storing the state of residence information in a vector named
+\texttt{student.state}. I have created the vector for you below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{student.state <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"MI"}\NormalTok{, }\StringTok{"IL"}\NormalTok{, }\StringTok{"NY"}\NormalTok{, }\StringTok{"MI"}\NormalTok{, }\StringTok{"NY"}\NormalTok{, }\StringTok{"HI"}\NormalTok{, }\StringTok{"IL"}\NormalTok{, }\StringTok{"MI"}\NormalTok{, }\StringTok{"MI"}\NormalTok{, }\StringTok{"NY"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+I am asking you to do the tasks below. Again do them in separate R code
+blocks.
+
+Convert the contents of student.state into factors (look up command
+\texttt{as.factor})
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{student.state.factor <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(student.state)}
+\end{Highlighting}
+\end{Shaded}
+
+Count the number of levels in the factor created above (Useful command:
+\texttt{levels})
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nlevels}\NormalTok{(student.state.factor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+Figure out which state(s) appears in the list only once (this is a hard
+one!)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(student.state.factor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Factor w/ 4 levels "HI","IL","MI",..: 3 2 4 3 4 1 2 3 3 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{once <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(student.state.factor)}
+
+\KeywordTok{names}\NormalTok{(once[once }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "HI"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# HI}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Problem 3: Data frame
+basics}\label{problem-3-data-frame-basics}
+
+We will continue working with the nycflights13 dataset we looked at last
+class. Please be sure to keep the data file in the same directory as the
+RMD file.
+
+First - read the data into an object named \texttt{nyc}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Write code below to import nycflightsjan13 dataset into an object named nyc}
+\NormalTok{nyc <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"nycflightsjan13.csv"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(}\StringTok{"Str"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Str"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(nyc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    27004 obs. of  17 variables:
+##  $ X        : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ year     : int  2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 ...
+##  $ month    : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ day      : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ dep_time : int  517 533 542 544 554 554 555 557 557 558 ...
+##  $ dep_delay: int  2 4 2 -1 -6 -4 -5 -3 -3 -2 ...
+##  $ arr_time : int  830 850 923 1004 812 740 913 709 838 753 ...
+##  $ arr_delay: int  11 20 33 -18 -25 12 19 -14 -8 8 ...
+##  $ carrier  : Factor w/ 16 levels "9E","AA","AS",..: 12 12 2 4 5 12 4 6 4 2 ...
+##  $ tailnum  : Factor w/ 3149 levels "","N0EGMQ","N10156",..: 170 448 1968 2544 2147 933 1524 2605 1816 960 ...
+##  $ flight   : int  1545 1714 1141 725 461 1696 507 5708 79 301 ...
+##  $ origin   : Factor w/ 3 levels "EWR","JFK","LGA": 1 3 2 2 3 1 1 3 2 3 ...
+##  $ dest     : Factor w/ 94 levels "ALB","ATL","AUS",..: 39 39 51 9 2 61 31 38 47 61 ...
+##  $ air_time : int  227 227 160 183 116 150 158 53 140 138 ...
+##  $ distance : int  1400 1416 1089 1576 762 719 1065 229 944 733 ...
+##  $ hour     : int  5 5 5 5 5 5 5 5 5 5 ...
+##  $ minute   : int  17 33 42 44 54 54 55 57 57 58 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"Summary"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Summary"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(nyc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        X              year          month        day           dep_time   
+##  Min.   :    1   Min.   :2013   Min.   :1   Min.   : 1.00   Min.   :   1  
+##  1st Qu.: 6752   1st Qu.:2013   1st Qu.:1   1st Qu.: 8.00   1st Qu.: 907  
+##  Median :13502   Median :2013   Median :1   Median :16.00   Median :1409  
+##  Mean   :13502   Mean   :2013   Mean   :1   Mean   :15.99   Mean   :1347  
+##  3rd Qu.:20253   3rd Qu.:2013   3rd Qu.:1   3rd Qu.:24.00   3rd Qu.:1738  
+##  Max.   :27004   Max.   :2013   Max.   :1   Max.   :31.00   Max.   :2359  
+##                                                             NA's   :521   
+##    dep_delay          arr_time      arr_delay          carrier    
+##  Min.   : -30.00   Min.   :   1   Min.   : -70.00   UA     :4637  
+##  1st Qu.:  -5.00   1st Qu.:1118   1st Qu.: -15.00   B6     :4427  
+##  Median :  -2.00   Median :1556   Median :  -3.00   EV     :4171  
+##  Mean   :  10.04   Mean   :1523   Mean   :   6.13   DL     :3690  
+##  3rd Qu.:   8.00   3rd Qu.:1946   3rd Qu.:  13.00   AA     :2794  
+##  Max.   :1301.00   Max.   :2400   Max.   :1272.00   MQ     :2271  
+##  NA's   :521       NA's   :536    NA's   :606       (Other):5014  
+##     tailnum          flight     origin          dest          air_time    
+##         :  155   Min.   :   1   EWR:9893   ATL    : 1396   Min.   : 20.0  
+##  N730MQ :   74   1st Qu.: 542   JFK:9161   ORD    : 1269   1st Qu.: 84.0  
+##  N739MQ :   73   Median :1459   LGA:7950   BOS    : 1245   Median :137.0  
+##  N713MQ :   70   Mean   :1959              MCO    : 1175   Mean   :154.2  
+##  N719MQ :   66   3rd Qu.:3750              FLL    : 1161   3rd Qu.:194.0  
+##  N734MQ :   66   Max.   :8500              LAX    : 1159   Max.   :667.0  
+##  (Other):26500                             (Other):19599   NA's   :606    
+##     distance         hour           minute     
+##  Min.   :  80   Min.   : 0.00   Min.   : 0.00  
+##  1st Qu.: 483   1st Qu.: 9.00   1st Qu.:16.00  
+##  Median : 872   Median :14.00   Median :31.00  
+##  Mean   :1007   Mean   :13.15   Mean   :31.72  
+##  3rd Qu.:1372   3rd Qu.:17.00   3rd Qu.:50.00  
+##  Max.   :4983   Max.   :23.00   Max.   :59.00  
+##                 NA's   :521     NA's   :521
+\end{verbatim}
+
+I now would like you to answer the following - all in their own separate
+R code blocks.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Let's first filter this data to small portions. For example: How many
+  flights where there by United Airlines (code: UA) on Jan 12th 2013?
+  Provide the answer as an \textbf{inline R code}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(}\KeywordTok{subset}\NormalTok{(nyc, nyc}\OperatorTok{$}\NormalTok{carrier }\OperatorTok{==}\StringTok{ "UA"} \OperatorTok{&}\StringTok{ }\NormalTok{nyc}\OperatorTok{$}\NormalTok{day }\OperatorTok{==}\StringTok{ }\DecValTok{12}\NormalTok{ ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 112
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Lets focus on Arrival Delay. First thing we want to figure is: a) What
+  was the average arrival delay in Jan 2013? and b) Whats was the
+  maximum arrival delay? c) What was the median arrival delay. Note: You
+  will need to make sure that you take care of NA values using the na.rm
+  = TRUE option as we did in class.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Average delay}
+\NormalTok{avgdelay <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(nyc}\OperatorTok{$}\NormalTok{arr_delay, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{avgdelay}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6.129972
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Maximum arrival delay}
+\NormalTok{mad <-}\StringTok{ }\KeywordTok{max}\NormalTok{(nyc}\OperatorTok{$}\NormalTok{arr_delay, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{mad}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1272
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#median}
+\NormalTok{median <-}\StringTok{ }\KeywordTok{median}\NormalTok{(nyc}\OperatorTok{$}\NormalTok{arr_delay, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{median}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -3
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Lets see if all airlines are equally terrible as far as flight arrival
+  delays are concerned. For this question you will have to make sure
+  that airline column is coded as a factor.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airlinefactor <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(nyc}\OperatorTok{$}\NormalTok{carrier)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Calculate average arrival delays by airline (Hint: look up the command
+  \texttt{tapply})
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{delaybyairline <-}\StringTok{ }\KeywordTok{tapply}\NormalTok{(nyc}\OperatorTok{$}\NormalTok{arr_delay, nyc}\OperatorTok{$}\NormalTok{carrier, mean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{delaybyairline}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          9E          AA          AS          B6          DL          EV 
+##  10.2074324   0.9823789   8.9677419   4.7171992  -4.4046512  25.1601917 
+##          F9          FL          HA          MQ          OO          UA 
+##  21.8305085   3.3179012  27.4838710   7.8837948 107.0000000   3.1755991 
+##          US          VX          WN          YV 
+##   1.4311454 -15.2802548   5.8862944  13.7692308
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Draw a Bar Plot of Average Arrival Delays for all the Airlines (Hint:
+  command for making a Bar Plot is simply \texttt{barplot})
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{barplot}\NormalTok{(delaybyairline, }\DataTypeTok{main =} \StringTok{"Delays by Airline"}\NormalTok{, }\DataTypeTok{cex.names =} \FloatTok{0.7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Which airline has the highest average delay? Which airline has the
+  smallest average delay? Are there airlines that actually have negative
+  average delay?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Highest Delay}
+\KeywordTok{names}\NormalTok{(delaybyairline[delaybyairline }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(delaybyairline)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "OO"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#lowestdelay}
+\KeywordTok{names}\NormalTok{(delaybyairline[delaybyairline }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(delaybyairline)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "VX"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Negative?}
+\KeywordTok{any}\NormalTok{(delaybyairline }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Yes, this is true!}
+\end{Highlighting}
+\end{Shaded}
+
+That's it. Once you are done, make sure everything works and knits well
+and then you can uplaod the RMD flile and the html output to Canvas.
+
+
+\end{document}

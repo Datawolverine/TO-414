@@ -1,0 +1,66 @@
+---
+title: "Class Exercise 9/20"
+author: "Adam K, Syed Ahmad, Jacob Shelton"
+date: "September 20, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+nyc <- read.csv("nycflightsjan13.csv")
+
+str(nyc)
+
+summary(nyc)
+
+```
+2. How many carriers there are, how many destinations there are.
+
+```{r}
+
+##Carriers
+nlevels(nyc$carrier)
+
+#Destinations
+
+nlevels(nyc$dest)
+
+```
+
+3. How many flights from LGA to DTW were delayed by more than 10 minutes? (arr_delay)
+
+```{r}
+logic <- nyc$arr_delay > 10 & nyc$origin == "LGA" & nyc$dest == "DTW"
+
+length(which(logic == TRUE))
+```
+OR
+
+```{r}
+nrow(subset(nyc, nyc$arr_delay > 10 & nyc$origin == "LGA" & nyc$dest == "DTW"))
+```
+
+4a. What is the average speed of flights leaving NYC? (mile per hour)
+
+```{r}
+nyc$speed <- nyc$distance/(nyc$air_time/60)
+mean(nyc$speed, na.rm = TRUE)
+```
+4b. Which is the slowest airline? Which is the Fastest?
+
+```{r}
+#Slowest
+
+meanspeeds <- tapply(nyc$speed, nyc$carrier, mean, na.rm = T)
+slowindex <- meanspeeds == min(meanspeeds)
+names(meanspeeds[slowindex])
+
+# Fastest
+
+fastindex <- meanspeeds == max(meanspeeds)
+names(meanspeeds[fastindex])
+```
+
